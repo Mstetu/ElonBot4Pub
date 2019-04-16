@@ -1,25 +1,19 @@
 import discord
 from discord.ext import commands
-
 TOKEN = 'NTU3Mjk5NDk3MDM5MDM2NDM2.XLViYA.g3B_VWA8xr8TP86vcbX5Rbrxa5o'
+bot = commands.Bot(command_prefix='.')
 
-client = commands.Bot(command_prefix = '.')
-
-@client.event
+@bot.event
 async def on_ready():
-    print('Bot Is Ready')
+    print("Online")
 
-@client.command()
-async def whymydolphinstopworkinglmao():
-    await client.say('HAHAHAHAHAHHAHAHA')
+@bot.command()
+async def whymydolphinstopworkinglmao(ctx):
+    await ctx.send('HAHAHHAHAHAHAHAHAH')
 
-@client.command(pass_context=True)
+@bot.command()
 async def clear(ctx, amount=100):
-    channel = ctx.message.channel
-    messages = []
-    async for message in client.logs_from(channel, limit=int(amount)):
-        messages.append(message)
-    await client.delete_messages(messages)
-    await client.say('Messages deleted.')
+	await ctx.channel.purge(limit=amount)
+    
 
-client.run(TOKEN)
+bot.run(TOKEN)
